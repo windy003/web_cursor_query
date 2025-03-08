@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor 使用额度查询</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cursor 使用额度查询</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">邮箱:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">查询使用额度</button>
+        </form>
+        
+        {% if result %}
+            <div class="result">
+                {% if result.error %}
+                    <p class="error">错误: {{ result.error }}</p>
+                {% else %}
+                    <h2>使用额度信息</h2>
+                    <p><strong>总额度:</strong> {{ result.total_quota }}</p>
+                    <p><strong>已使用:</strong> {{ result.used_quota }}</p>
+                    <p><strong>剩余额度:</strong> {{ result.remaining_quota }}</p>
+                    <p><strong>到期日期:</strong> {{ result.expiry_date }}</p>
+                    <p><strong>距离到期还有:</strong> {{ result.days_until_expiry }} 天</p>
+                    <p><strong>每日平均剩余额度:</strong> {{ result.daily_average_remaining }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html> 

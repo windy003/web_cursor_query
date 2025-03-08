@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor 账户额度结果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cursor 账户额度信息</h1>
+        
+        <div class="result-card">
+            <h2>账户信息</h2>
+            <div class="info-item">
+                <span class="label">用户名:</span>
+                <span class="value">{{ account.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">邮箱:</span>
+                <span class="value">{{ account.email }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">账户类型:</span>
+                <span class="value">{{ account.subscription.plan }}</span>
+            </div>
+            
+            <h2>额度信息</h2>
+            <div class="info-item">
+                <span class="label">已使用额度:</span>
+                <span class="value">{{ account.credits.used }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">总额度:</span>
+                <span class="value">{{ account.credits.total }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">剩余额度:</span>
+                <span class="value">{{ account.credits.total - account.credits.used }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">下次重置时间:</span>
+                <span class="value">{{ account.credits.resetDate }}</span>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('index') }}" class="btn">返回</a>
+    </div>
+</body>
+</html> 
